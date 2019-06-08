@@ -37,7 +37,7 @@ namespace Restaurant_App
                         while (reader.Read())
                         {
                             MessageBox.Show(reader[1].ToString());
-                            waiterNames.Append(reader["Waiter name"].ToString());
+                            waiterNames.Append(reader["Waiter name"].ToString()); //this is a change
                         }
                     }
                 }

@@ -38,9 +38,19 @@ namespace Restaurant_App
 
         }
 
-        private void AccountsDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
+        private void BookingDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            BindingNavigator.BindingSource = bookingBindingSource;
+        }
 
+        private void MenuDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            BindingNavigator.BindingSource = menuBindingSource;
+        }
+
+        private void AccountsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            BindingNavigator.BindingSource = accountsBindingSource;
         }
     }
 }

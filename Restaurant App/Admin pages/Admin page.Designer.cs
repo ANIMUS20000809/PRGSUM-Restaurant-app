@@ -259,6 +259,7 @@
             this.menuDataGridView.Name = "menuDataGridView";
             this.menuDataGridView.Size = new System.Drawing.Size(345, 220);
             this.menuDataGridView.TabIndex = 1;
+            this.menuDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MenuDataGridView_CellClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -305,7 +306,7 @@
             this.accountsDataGridView.Name = "accountsDataGridView";
             this.accountsDataGridView.Size = new System.Drawing.Size(833, 246);
             this.accountsDataGridView.TabIndex = 3;
-            this.accountsDataGridView.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.AccountsDataGridView_CellEnter);
+            this.accountsDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AccountsDataGridView_CellClick);
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -399,6 +400,7 @@
             this.bookingDataGridView.Name = "bookingDataGridView";
             this.bookingDataGridView.Size = new System.Drawing.Size(546, 220);
             this.bookingDataGridView.TabIndex = 5;
+            this.bookingDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BookingDataGridView_CellClick);
             // 
             // dataGridViewTextBoxColumn4
             // 

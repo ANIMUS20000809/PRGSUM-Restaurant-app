@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace Restaurant_App
 {
@@ -29,15 +30,20 @@ namespace Restaurant_App
                 // TODO: Save booking to database
                 MessageBox.Show("Table Booked!");
             }
+
             fillData(dateTimePicker1.Value);
         }
         /// <summary>
         /// Fills the booking data from the bookings table
         /// </summary>
-        /// <param name="dt">The DateTime of the DatePicker</param>
+        /// <param name="dt">The DateTime value of the DatePicker</param>
         public void fillData(DateTime dt)
         {
             // TODO: Fill the booking data
+            using (SqlConnection con = new SqlConnection(SessionContext.ConnectionString))
+            {
+
+            }
         }
         #endregion
 

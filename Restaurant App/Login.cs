@@ -28,8 +28,7 @@ namespace Restaurant_App
             {
                 if (usrbx.Text == "Admin")
                 {
-                    SessionContext.Role = SessionContext.SessionContextRole.Admin;
-                    MessageBox.Show($"Welcome back {SessionContext.Role}!");
+                    MessageBox.Show($"Welcome back Admin!");
                     Admin_page a = new Admin_page();
                     a.ShowDialog();
                 }
@@ -51,15 +50,13 @@ namespace Restaurant_App
                                         switch (rd["Role"].ToString())
                                         {
                                             case "Customers":
-                                                SessionContext.Role = SessionContext.SessionContextRole.Customer;
-                                                MessageBox.Show($"Welcome back {SessionContext.Role}!");
+                                                MessageBox.Show($"Welcome back {rd["Name"].ToString()}!");
                                                 C_Book c = new C_Book();
                                                 c.ShowDialog();
                                                 break;
 
                                             case "Waiters":
-                                                SessionContext.Role = SessionContext.SessionContextRole.Waiter;
-                                                MessageBox.Show($"Welcome back {SessionContext.Role}!");
+                                                MessageBox.Show($"Welcome back {rd["Name"].ToString()}!");
                                                 W_Tables w = new W_Tables();
                                                 w.ShowDialog();
                                                 break;

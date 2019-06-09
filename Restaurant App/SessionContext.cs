@@ -17,6 +17,12 @@ namespace Restaurant_App
 
         public static string Table { get; set; }
 
+        public static int ID { get; set; }
+
+        public static int bookRowCount { get; set; }
+
+        public static int orderRowCount { get; set; }
+
         #endregion
 
         #region Methods

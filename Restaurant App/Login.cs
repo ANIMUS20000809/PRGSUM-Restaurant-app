@@ -40,8 +40,18 @@ namespace Restaurant_App
 
                         if (con.State == ConnectionState.Open)
                         {
-                            using (SqlCommand com = new SqlCommand($"SELECT Name, Role FROM Accounts WHERE Name = '{usrbx.Text}'", con))
+                            using (SqlCommand com = new SqlCommand("SELECT * FROM Booking", con))
                             {
+                                
+                                using (SqlDataReader rd = com.ExecuteReader())
+                                {
+                                    while (rd.Read())
+                                    {
+                                        SessionContext.bookRowCount++;
+                                    }
+                                }
+
+                                com.CommandText = $"SELECT Name, Role, AccountID FROM Accounts WHERE Name = '{usrbx.Text}'";
                                 using (SqlDataReader rd = com.ExecuteReader())
                                 {
                                     if (rd.HasRows)
@@ -50,17 +60,19 @@ namespace Restaurant_App
                                         switch (rd["Role"].ToString())
                                         {
                                             case "Customers":
+                                                SessionContext.Name = rd["Name"].ToString();
+                                                SessionContext.ID = (int)rd["AccountID"];
                                                 MessageBox.Show($"Welcome back {rd["Name"].ToString()}!");
                                                 C_Book c = new C_Book();
                                                 c.ShowDialog();
                                                 break;
 
                                             case "Waiters":
+                                                SessionContext.Name = rd["Name"].ToString();
                                                 MessageBox.Show($"Welcome back {rd["Name"].ToString()}!");
                                                 W_Tables w = new W_Tables();
                                                 w.ShowDialog();
                                                 break;
-
                                         }
                                     }
                                     else
@@ -83,7 +95,7 @@ namespace Restaurant_App
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error ocurred. Please try again: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("An error occurred. Please try again: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         /// <summary>

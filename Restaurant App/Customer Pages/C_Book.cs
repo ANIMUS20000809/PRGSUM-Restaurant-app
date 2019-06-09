@@ -25,26 +25,58 @@ namespace Restaurant_App
         /// <param name="table"> The number of the table being booked</param>
         private void Book(string table, object s)
         {
-            if (s is Control)
+            if (!string.IsNullOrWhiteSpace(textBox1.Text))
             {
-                Control c = (Control)s;
-
-                if (c.BackColor == Color.Lime)
+                if (s is Control)
                 {
-                    if (MessageBox.Show("Are you sure you want to book?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    Control c = (Control)s;
+
+                    if (c.BackColor == Color.Lime)
                     {
-                        // TODO: Save booking to database
-                        MessageBox.Show("Table Booked!", "Booked", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                        if (MessageBox.Show("Are you sure you want to book?",
+                                            "Confirmation",
+                                            MessageBoxButtons.YesNo,
+                                            MessageBoxIcon.Information) == DialogResult.Yes)
+                        {
+                            // TODO: Save booking to database
+                            using (SqlConnection con = new SqlConnection(SessionContext.ConnectionString))
+                            {
+                                con.Open();
 
-                    c.BackColor = Color.Red; 
-                }
-                else
-                {
-                    MessageBox.Show("This table is already booked", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                if (con.State == ConnectionState.Open)
+                                {
+                                    try
+                                    {
+                                        using (SqlCommand com = new SqlCommand($"INSERT INTO Booking VALUES('{++SessionContext.bookRowCount}', '{SessionContext.ID}', {dateTimePicker1.Value}', '{Convert.ToInt32(textBox1.Text)}, 'False', '{table}')", con))
+                                        {
+                                            c.BackColor = Color.Red;
+                                            MessageBox.Show("Table Booked successfully!", "Booked", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        }
+                                    }
+                                    catch (SqlException sEx)
+                                    {
+                                        MessageBox.Show(sEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                    catch (FormatException FeX)
+                                    {
+                                        MessageBox.Show(FeX.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("This table is already booked", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
-            
+            else
+            {
+                MessageBox.Show("Please enter the number of people", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             fillData(dateTimePicker1.Value);
         }
         /// <summary>
@@ -53,16 +85,15 @@ namespace Restaurant_App
         /// <param name="dt">The DateTime value of the DatePicker</param>
         public void fillData(DateTime dt)
         {
-            // TODO: Fill the booking data
+            // TODO: Fill in the booking data
             try
             {
                 using (SqlConnection con = new SqlConnection(SessionContext.ConnectionString))
                 {
+                    con.Open();
 
                     if (con.State == ConnectionState.Open)
                     {
-                        con.Open();
-
                         using (SqlCommand com = new SqlCommand($"SELECT Date, TableID FROM Booking WHERE Date = '{dt.ToString()}'", con))
                         {
                             using (SqlDataReader rd = com.ExecuteReader())
@@ -71,7 +102,7 @@ namespace Restaurant_App
                                 {
                                     while (rd.Read())
                                     {
-                                        switch (rd["TableID"])
+                                        switch (Convert.ToInt32(rd["TableID"]))
                                         {
                                             case 1:
                                                 button1.BackColor = Color.Red;
@@ -136,6 +167,10 @@ namespace Restaurant_App
                                         }
                                     }
                                 }
+                                else
+                                {
+                                    Reset();
+                                }
                             }
                         }
                     }
@@ -145,6 +180,33 @@ namespace Restaurant_App
             {
                 MessageBox.Show(sEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        /// <summary>
+        /// Resets all of the table colors
+        /// </summary>
+        private void Reset()
+        {
+            button1.BackColor = Color.Lime;
+            button2.BackColor = Color.Lime;
+            button3.BackColor = Color.Lime;
+            button4.BackColor = Color.Lime;
+            button5.BackColor = Color.Lime;
+            button6.BackColor = Color.Lime;
+            button7.BackColor = Color.Lime;
+            button8.BackColor = Color.Lime;
+            button9.BackColor = Color.Lime;
+            button10.BackColor = Color.Lime;
+            button11.BackColor = Color.Lime;
+            button12.BackColor = Color.Lime;
+            button13.BackColor = Color.Lime;
+            button14.BackColor = Color.Lime;
+            button15.BackColor = Color.Lime;
+            button16.BackColor = Color.Lime;
+            button17.BackColor = Color.Lime;
+            button18.BackColor = Color.Lime;
+            button19.BackColor = Color.Lime;
+            button20.BackColor = Color.Lime;
         }
         #endregion
 
@@ -249,6 +311,14 @@ namespace Restaurant_App
             Book(button20.Text, sender);
         }
 
+        private void C_Book_Load(object sender, EventArgs e)
+        {
+            fillData(dateTimePicker1.Value);
+        }
+        private void DateTimePicker1_MouseLeave(object sender, EventArgs e)
+        {
+            fillData(dateTimePicker1.Value);
+        }
         #endregion
 
 

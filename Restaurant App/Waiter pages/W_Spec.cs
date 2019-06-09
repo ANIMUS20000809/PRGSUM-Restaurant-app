@@ -83,6 +83,25 @@ namespace Restaurant_App
                 btnAdd.Enabled = false;
                 button1.Enabled = false;
                 button2.Enabled = false;
+                trackBar1.Enabled = false;
+                comboBox1.Enabled = false;
+            }
+        }
+
+        private void newBill()
+        {
+            if (MessageBox.Show("Are you sure? All current items on the list will be lost?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                btnAdd.Enabled = true;
+                button1.Enabled = true;
+                button2.Enabled = true;
+                trackBar1.Enabled = true;
+                trackBar1.Value = 1;
+                comboBox1.Enabled = true;
+                comboBox1.SelectedIndex = -1;
+                list.Clear();
+                listBox1.Items.Clear();
+                label6.Text = "Total: ";
             }
         }
 
@@ -121,6 +140,11 @@ namespace Restaurant_App
         private void Button2_Click(object sender, EventArgs e)
         {
             Delete();
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            newBill();
         }
     }
 }

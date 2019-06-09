@@ -46,7 +46,7 @@ namespace Restaurant_App {
         
         private global::System.Data.DataRelation relationFK_Order_line_Orders1;
         
-        private global::System.Data.DataRelation relationFK_Waiter_tables_Waiters1;
+        private global::System.Data.DataRelation relationFK_Orders_Waiter_tables;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -373,7 +373,7 @@ namespace Restaurant_App {
             this.relationFK_Booking_Customers = this.Relations["FK_Booking_Customers"];
             this.relationFK_Order_line_Menu = this.Relations["FK_Order line_Menu"];
             this.relationFK_Order_line_Orders1 = this.Relations["FK_Order line_Orders1"];
-            this.relationFK_Waiter_tables_Waiters1 = this.Relations["FK_Waiter tables_Waiters1"];
+            this.relationFK_Orders_Waiter_tables = this.Relations["FK_Orders_Waiter tables"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -412,10 +412,10 @@ namespace Restaurant_App {
                         this.tableOrders.OrderIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableOrder_line.OrderIDColumn}, false);
             this.Relations.Add(this.relationFK_Order_line_Orders1);
-            this.relationFK_Waiter_tables_Waiters1 = new global::System.Data.DataRelation("FK_Waiter tables_Waiters1", new global::System.Data.DataColumn[] {
-                        this.tableWaiters.WaiterIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableWaiter_tables.WaiterIDColumn}, false);
-            this.Relations.Add(this.relationFK_Waiter_tables_Waiters1);
+            this.relationFK_Orders_Waiter_tables = new global::System.Data.DataRelation("FK_Orders_Waiter tables", new global::System.Data.DataColumn[] {
+                        this.tableWaiter_tables.TableIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableOrders.TableIDColumn}, false);
+            this.Relations.Add(this.relationFK_Orders_Waiter_tables);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1841,12 +1841,15 @@ namespace Restaurant_App {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public OrdersRow AddOrdersRow(int OrderID, int TableID, int CustID) {
+            public OrdersRow AddOrdersRow(int OrderID, Waiter_tablesRow parentWaiter_tablesRowByFK_Orders_Waiter_tables, int CustID) {
                 OrdersRow rowOrdersRow = ((OrdersRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         OrderID,
-                        TableID,
+                        null,
                         CustID};
+                if ((parentWaiter_tablesRowByFK_Orders_Waiter_tables != null)) {
+                    columnValuesArray[1] = parentWaiter_tablesRowByFK_Orders_Waiter_tables[0];
+                }
                 rowOrdersRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowOrdersRow);
                 return rowOrdersRow;
@@ -2031,8 +2034,6 @@ namespace Restaurant_App {
             
             private global::System.Data.DataColumn columnTableID;
             
-            private global::System.Data.DataColumn columnWaiterID;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public Waiter_tablesDataTable() {
@@ -2076,14 +2077,6 @@ namespace Restaurant_App {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn WaiterIDColumn {
-                get {
-                    return this.columnWaiterID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2119,14 +2112,10 @@ namespace Restaurant_App {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Waiter_tablesRow AddWaiter_tablesRow(int TableID, WaitersRow parentWaitersRowByFK_Waiter_tables_Waiters1) {
+            public Waiter_tablesRow AddWaiter_tablesRow(int TableID) {
                 Waiter_tablesRow rowWaiter_tablesRow = ((Waiter_tablesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        TableID,
-                        null};
-                if ((parentWaitersRowByFK_Waiter_tables_Waiters1 != null)) {
-                    columnValuesArray[1] = parentWaitersRowByFK_Waiter_tables_Waiters1[0];
-                }
+                        TableID};
                 rowWaiter_tablesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowWaiter_tablesRow);
                 return rowWaiter_tablesRow;
@@ -2157,7 +2146,6 @@ namespace Restaurant_App {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
                 this.columnTableID = base.Columns["TableID"];
-                this.columnWaiterID = base.Columns["WaiterID"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2165,8 +2153,6 @@ namespace Restaurant_App {
             private void InitClass() {
                 this.columnTableID = new global::System.Data.DataColumn("TableID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTableID);
-                this.columnWaiterID = new global::System.Data.DataColumn("WaiterID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnWaiterID);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnTableID}, true));
                 this.columnTableID.AllowDBNull = false;
@@ -3454,6 +3440,17 @@ namespace Restaurant_App {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public Waiter_tablesRow Waiter_tablesRow {
+                get {
+                    return ((Waiter_tablesRow)(this.GetParentRow(this.Table.ParentRelations["FK_Orders_Waiter tables"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Orders_Waiter tables"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public Order_lineRow[] GetOrder_lineRows() {
                 if ((this.Table.ChildRelations["FK_Order line_Orders1"] == null)) {
                     return new Order_lineRow[0];
@@ -3491,41 +3488,13 @@ namespace Restaurant_App {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int WaiterID {
-                get {
-                    try {
-                        return ((int)(this[this.tableWaiter_tables.WaiterIDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'WaiterID\' in table \'Waiter tables\' is DBNull.", e);
-                    }
+            public OrdersRow[] GetOrdersRows() {
+                if ((this.Table.ChildRelations["FK_Orders_Waiter tables"] == null)) {
+                    return new OrdersRow[0];
                 }
-                set {
-                    this[this.tableWaiter_tables.WaiterIDColumn] = value;
+                else {
+                    return ((OrdersRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Orders_Waiter tables"])));
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public WaitersRow WaitersRow {
-                get {
-                    return ((WaitersRow)(this.GetParentRow(this.Table.ParentRelations["FK_Waiter tables_Waiters1"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Waiter tables_Waiters1"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsWaiterIDNull() {
-                return this.IsNull(this.tableWaiter_tables.WaiterIDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetWaiterIDNull() {
-                this[this.tableWaiter_tables.WaiterIDColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3608,17 +3577,6 @@ namespace Restaurant_App {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetWaiter_SurnameNull() {
                 this[this.tableWaiters.Waiter_SurnameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Waiter_tablesRow[] GetWaiter_tablesRows() {
-                if ((this.Table.ChildRelations["FK_Waiter tables_Waiters1"] == null)) {
-                    return new Waiter_tablesRow[0];
-                }
-                else {
-                    return ((Waiter_tablesRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Waiter tables_Waiters1"])));
-                }
             }
         }
         
@@ -5978,35 +5936,25 @@ SELECT OrderID, TableID, CustID FROM Orders WHERE (OrderID = @OrderID)";
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "Waiter tables";
             tableMapping.ColumnMappings.Add("TableID", "TableID");
-            tableMapping.ColumnMappings.Add("WaiterID", "WaiterID");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Waiter tables] WHERE (([TableID] = @Original_TableID) AND ((@I" +
-                "sNull_WaiterID = 1 AND [WaiterID] IS NULL) OR ([WaiterID] = @Original_WaiterID))" +
-                ")";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [Waiter tables] WHERE (([TableID] = @Original_TableID))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TableID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TableID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_WaiterID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WaiterID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WaiterID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WaiterID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Waiter tables] ([TableID], [WaiterID]) VALUES (@TableID, @Wait" +
-                "erID);\r\nSELECT TableID, WaiterID FROM [Waiter tables] WHERE (TableID = @TableID)" +
-                "";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Waiter tables] ([TableID]) VALUES (@TableID);\r\nSELECT TableID FROM [" +
+                "Waiter tables] WHERE (TableID = @TableID)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TableID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TableID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WaiterID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WaiterID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Waiter tables] SET [TableID] = @TableID, [WaiterID] = @WaiterID WHERE (([TableID] = @Original_TableID) AND ((@IsNull_WaiterID = 1 AND [WaiterID] IS NULL) OR ([WaiterID] = @Original_WaiterID)));
-SELECT TableID, WaiterID FROM [Waiter tables] WHERE (TableID = @TableID)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [Waiter tables] SET [TableID] = @TableID WHERE (([TableID] = @Original_Tab" +
+                "leID));\r\nSELECT TableID FROM [Waiter tables] WHERE (TableID = @TableID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TableID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TableID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WaiterID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WaiterID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TableID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TableID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_WaiterID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WaiterID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WaiterID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WaiterID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6022,7 +5970,7 @@ SELECT TableID, WaiterID FROM [Waiter tables] WHERE (TableID = @TableID)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT TableID, WaiterID FROM dbo.[Waiter tables]";
+            this._commandCollection[0].CommandText = "SELECT TableID FROM [Waiter tables]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -6083,16 +6031,8 @@ SELECT TableID, WaiterID FROM [Waiter tables] WHERE (TableID = @TableID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_TableID, global::System.Nullable<int> Original_WaiterID) {
+        public virtual int Delete(int Original_TableID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_TableID));
-            if ((Original_WaiterID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_WaiterID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6113,14 +6053,8 @@ SELECT TableID, WaiterID FROM [Waiter tables] WHERE (TableID = @TableID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int TableID, global::System.Nullable<int> WaiterID) {
+        public virtual int Insert(int TableID) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(TableID));
-            if ((WaiterID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((int)(WaiterID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6141,23 +6075,9 @@ SELECT TableID, WaiterID FROM [Waiter tables] WHERE (TableID = @TableID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int TableID, global::System.Nullable<int> WaiterID, int Original_TableID, global::System.Nullable<int> Original_WaiterID) {
+        public virtual int Update(int TableID, int Original_TableID) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(TableID));
-            if ((WaiterID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(WaiterID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_TableID));
-            if ((Original_WaiterID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_WaiterID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_TableID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6178,8 +6098,8 @@ SELECT TableID, WaiterID FROM [Waiter tables] WHERE (TableID = @TableID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> WaiterID, int Original_TableID, global::System.Nullable<int> Original_WaiterID) {
-            return this.Update(Original_TableID, WaiterID, Original_TableID, Original_WaiterID);
+        public virtual int Update(int Original_TableID) {
+            return this.Update(Original_TableID, Original_TableID);
         }
     }
     
@@ -7079,6 +6999,15 @@ SELECT WaiterID, [Waiter name], [Waiter Surname] FROM Waiters WHERE (WaiterID = 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private int UpdateUpdatedRows(RestaurantDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._waiter_tablesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Waiter_tables.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._waiter_tablesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._customersTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Customers.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -7106,15 +7035,6 @@ SELECT WaiterID, [Waiter name], [Waiter Surname] FROM Waiters WHERE (WaiterID = 
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._waitersTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Waiters.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._waitersTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._bookingTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Booking.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -7133,12 +7053,12 @@ SELECT WaiterID, [Waiter name], [Waiter Surname] FROM Waiters WHERE (WaiterID = 
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._waiter_tablesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Waiter_tables.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._waitersTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Waiters.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._waiter_tablesTableAdapter.Update(updatedRows));
+                    result = (result + this._waitersTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -7161,6 +7081,14 @@ SELECT WaiterID, [Waiter name], [Waiter Surname] FROM Waiters WHERE (WaiterID = 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private int UpdateInsertedRows(RestaurantDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._waiter_tablesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Waiter_tables.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._waiter_tablesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._customersTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Customers.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -7185,14 +7113,6 @@ SELECT WaiterID, [Waiter name], [Waiter Surname] FROM Waiters WHERE (WaiterID = 
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._waitersTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Waiters.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._waitersTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._bookingTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Booking.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -7209,11 +7129,11 @@ SELECT WaiterID, [Waiter name], [Waiter Surname] FROM Waiters WHERE (WaiterID = 
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._waiter_tablesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Waiter_tables.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._waitersTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Waiters.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._waiter_tablesTableAdapter.Update(addedRows));
+                    result = (result + this._waitersTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -7243,11 +7163,11 @@ SELECT WaiterID, [Waiter name], [Waiter Surname] FROM Waiters WHERE (WaiterID = 
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._waiter_tablesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Waiter_tables.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._waitersTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Waiters.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._waiter_tablesTableAdapter.Update(deletedRows));
+                    result = (result + this._waitersTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -7264,14 +7184,6 @@ SELECT WaiterID, [Waiter name], [Waiter Surname] FROM Waiters WHERE (WaiterID = 
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._bookingTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._waitersTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Waiters.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._waitersTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -7296,6 +7208,14 @@ SELECT WaiterID, [Waiter name], [Waiter Surname] FROM Waiters WHERE (WaiterID = 
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._customersTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._waiter_tablesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Waiter_tables.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._waiter_tablesTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

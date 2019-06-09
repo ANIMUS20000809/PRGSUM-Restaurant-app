@@ -126,7 +126,6 @@ namespace Restaurant_App
         {
             selectTable(button20.Text);
         }
-        #endregion
 
         private void W_Tables_Load(object sender, EventArgs e)
         {
@@ -165,5 +164,6 @@ namespace Restaurant_App
 
             }
         }
+        #endregion
     }
 }

@@ -28,11 +28,8 @@ namespace Restaurant_App
 
         private void Admin_page_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'restaurantDataSet.Booking' table. You can move, or remove it, as needed.
             this.bookingTableAdapter.Fill(this.restaurantDataSet.Booking);
-            // TODO: This line of code loads data into the 'restaurantDataSet.Menu' table. You can move, or remove it, as needed.
             this.menuTableAdapter.Fill(this.restaurantDataSet.Menu);
-            // TODO: This line of code loads data into the 'restaurantDataSet.Accounts' table. You can move, or remove it, as needed.
             this.accountsTableAdapter.Fill(this.restaurantDataSet.Accounts);
 
         }

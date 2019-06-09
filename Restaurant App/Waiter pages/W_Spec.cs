@@ -12,11 +12,14 @@ using System.Data.SqlClient;
 namespace Restaurant_App
 {
     public partial class W_Spec : Form
-    {
-        private List<int> Bill = new List<int>();
+    {   //Using abstract data types
+        private List<int> billAmmount = new List<int>();
+        private List<string> itemName = new List<string>();
+        private List<int> itemPrice = new List<int>();
         private int bill;
-        //Using abstract data type
-        private List<int> list = new List<int>();
+        private int orderID = 0;
+        
+        
         public W_Spec()
         {
             InitializeComponent();
@@ -32,31 +35,46 @@ namespace Restaurant_App
             {
                 case 0:
                     listBox1.Items.Add(comboBox1.SelectedItem.ToString() + " R100 x" + trackBar1.Value.ToString());
-                    list.Add(100 * trackBar1.Value);
+                    itemPrice.Add(100);
+                    billAmmount.Add(trackBar1.Value);
+                    itemName.Add(comboBox1.SelectedItem.ToString());
+                    bill += (100 * trackBar1.Value);
                     listBox1.SelectedIndex++;
                     break;
 
                 case 1:
                     listBox1.Items.Add(comboBox1.SelectedItem.ToString() + " R60 x" + trackBar1.Value.ToString());
-                    list.Add(60 * trackBar1.Value);
+                    itemPrice.Add(60);
+                    billAmmount.Add(trackBar1.Value);
+                    itemName.Add(comboBox1.SelectedItem.ToString());
+                    bill += (60 * trackBar1.Value);
                     listBox1.SelectedIndex++;
                     break;
 
                 case 2:
                     listBox1.Items.Add(comboBox1.SelectedItem.ToString() + " R120 x" + trackBar1.Value.ToString());
-                    list.Add(120 * trackBar1.Value);
+                    itemPrice.Add(120);
+                    billAmmount.Add(trackBar1.Value);
+                    itemName.Add(comboBox1.SelectedItem.ToString());
+                    bill += (120 * trackBar1.Value);
                     listBox1.SelectedIndex++;
                     break;
 
                 case 3:
                     listBox1.Items.Add(comboBox1.SelectedItem.ToString() + " R70 x" + trackBar1.Value.ToString());
-                    list.Add(70 * trackBar1.Value);
+                    itemPrice.Add(70);
+                    billAmmount.Add(trackBar1.Value);
+                    itemName.Add(comboBox1.SelectedItem.ToString());
+                    bill += (70 * trackBar1.Value);
                     listBox1.SelectedIndex++;
                     break;
 
                 case 4:
                     listBox1.Items.Add(comboBox1.SelectedItem.ToString() + " R70 x" + trackBar1.Value.ToString());
-                    list.Add(70 * trackBar1.Value);
+                    itemPrice.Add(70);
+                    billAmmount.Add(trackBar1.Value);
+                    itemName.Add(comboBox1.SelectedItem.ToString());
+                    bill += (70 * trackBar1.Value);
                     listBox1.SelectedIndex++;
                     break;
 
@@ -76,22 +94,28 @@ namespace Restaurant_App
             {
                 if (listBox1.SelectedIndex != -1)
                 {
-                    list.RemoveAt(listBox1.SelectedIndex);
+                    bill -= itemPrice[listBox1.SelectedIndex];
+                    itemPrice.RemoveAt(listBox1.SelectedIndex);
+                    billAmmount.RemoveAt(listBox1.SelectedIndex);
+                    itemName.RemoveAt(listBox1.SelectedIndex);
                     listBox1.Items.RemoveAt(listBox1.SelectedIndex);
                     listBox1.SelectedIndex++;
                 }
                 else
                 {
-                    MessageBox.Show("Please select an item from the menu to delete.");
+                    MessageBox.Show("Please select an item from the menu to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else if (listBox1.Items.Count != 0)
             {
                 listBox1.Items.Clear();
+                itemPrice.Clear();
+                billAmmount.Clear();
+                bill = 0;
             }
             else
             {
-                MessageBox.Show("There are no items to delete");
+                MessageBox.Show("There are no items to delete", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -99,35 +123,40 @@ namespace Restaurant_App
         /// Checking out
         /// </summary>
         private void Checkout()
-        {
+        {// TODO: Add bill to bill table
             try
             {
-                using (SqlConnection con = new SqlConnection(SessionContext.ConnectionString))
-                {
-                    
-                    con.Open();
-
-                    if (con.State == ConnectionState.Open)
-                    {
-                        using (SqlCommand com = new SqlCommand())
-                        {
-                            com.Connection = con;
-                            com.CommandText = "SELECT Menu";
-                        }
-                    }
-                }
-
                 if (MessageBox.Show("Are sure you want to proceed? You won't be able to change the bill if you proceed",
                                     "Confirmation",
                                     MessageBoxButtons.YesNo,
                                     MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    foreach (int item in list)
-                    {
-                        bill += item;
-                    }
-
                     label6.Text += "R" + bill.ToString();
+
+                    using (SqlConnection con = new SqlConnection(SessionContext.ConnectionString))
+                    {
+                        con.Open();
+
+                        if (con.State == ConnectionState.Open)
+                        {
+                            using (SqlCommand com = new SqlCommand())
+                            {
+                                int count = 0;
+                                com.Connection = con;
+
+                                foreach (int item in billAmmount)
+                                {
+                                    com.CommandText = $"INSERT INTO Bill VALUES('{++orderID}', '{SessionContext.Table}', '{itemName[item]}', '{billAmmount[item]}')";
+                                    com.ExecuteNonQuery();
+                                    count++;
+                                }
+                                MessageBox.Show($"These {count} items were added successfully to the database!",
+                                    "Done",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                            }
+                        }
+                    }
 
                     MessageBox.Show("Bill is completed!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btnAdd.Enabled = false;
@@ -160,7 +189,7 @@ namespace Restaurant_App
                 trackBar1.Value = 1;
                 comboBox1.Enabled = true;
                 comboBox1.SelectedIndex = -1;
-                list.Clear();
+                itemPrice.Clear();
                 listBox1.Items.Clear();
                 label6.Text = "Total: ";
             }

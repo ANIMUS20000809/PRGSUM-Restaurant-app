@@ -17,6 +17,7 @@ namespace Restaurant_App
             InitializeComponent();
         }
 
+        #region Event Handlers
         private void AccountsBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
             this.Validate();
@@ -29,8 +30,6 @@ namespace Restaurant_App
         {
             // TODO: This line of code loads data into the 'restaurantDataSet.Booking' table. You can move, or remove it, as needed.
             this.bookingTableAdapter.Fill(this.restaurantDataSet.Booking);
-            // TODO: This line of code loads data into the 'restaurantDataSet.Waiters' table. You can move, or remove it, as needed.
-            this.waitersTableAdapter.Fill(this.restaurantDataSet.Waiters);
             // TODO: This line of code loads data into the 'restaurantDataSet.Menu' table. You can move, or remove it, as needed.
             this.menuTableAdapter.Fill(this.restaurantDataSet.Menu);
             // TODO: This line of code loads data into the 'restaurantDataSet.Accounts' table. You can move, or remove it, as needed.
@@ -38,9 +37,20 @@ namespace Restaurant_App
 
         }
 
-        private void AccountsDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
+        private void BookingDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            BindingNavigator.BindingSource = bookingBindingSource;
         }
+
+        private void MenuDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            BindingNavigator.BindingSource = menuBindingSource;
+        }
+
+        private void AccountsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            BindingNavigator.BindingSource = accountsBindingSource;
+        } 
+        #endregion
     }
 }

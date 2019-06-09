@@ -10,16 +10,18 @@ namespace Restaurant_App
 {
     public class SessionContext
     {
-        public enum SessionContextRole { Admin, Waiter, Customer };
-
         #region Fields
         public const string ConnectionString = "Data Source=ANIMUS;Initial Catalog=Restaurant;Integrated Security=True";
-
-        public static SessionContextRole Role;
 
         public static string Name { get; set; }
 
         public static string Table { get; set; }
+
+        public static int ID { get; set; }
+
+        public static int bookRowCount { get; set; }
+
+        public static int orderRowCount { get; set; }
 
         #endregion
 

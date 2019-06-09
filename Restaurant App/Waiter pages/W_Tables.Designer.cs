@@ -94,6 +94,7 @@
             // button17
             // 
             this.button17.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button17.Enabled = false;
             this.button17.Location = new System.Drawing.Point(16, 294);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(75, 59);
@@ -105,6 +106,7 @@
             // button18
             // 
             this.button18.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button18.Enabled = false;
             this.button18.Location = new System.Drawing.Point(108, 294);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(75, 59);
@@ -116,6 +118,7 @@
             // button19
             // 
             this.button19.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button19.Enabled = false;
             this.button19.Location = new System.Drawing.Point(202, 294);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(75, 59);
@@ -127,6 +130,7 @@
             // button20
             // 
             this.button20.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button20.Enabled = false;
             this.button20.Location = new System.Drawing.Point(293, 294);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(75, 59);
@@ -138,6 +142,7 @@
             // button13
             // 
             this.button13.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button13.Enabled = false;
             this.button13.Location = new System.Drawing.Point(16, 227);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(75, 59);
@@ -149,6 +154,7 @@
             // button14
             // 
             this.button14.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button14.Enabled = false;
             this.button14.Location = new System.Drawing.Point(108, 227);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(75, 59);
@@ -160,6 +166,7 @@
             // button15
             // 
             this.button15.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button15.Enabled = false;
             this.button15.Location = new System.Drawing.Point(202, 227);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(75, 59);
@@ -171,6 +178,7 @@
             // button16
             // 
             this.button16.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button16.Enabled = false;
             this.button16.Location = new System.Drawing.Point(293, 227);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(75, 59);
@@ -182,6 +190,7 @@
             // button9
             // 
             this.button9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button9.Enabled = false;
             this.button9.Location = new System.Drawing.Point(16, 155);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(75, 59);
@@ -193,6 +202,7 @@
             // button10
             // 
             this.button10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button10.Enabled = false;
             this.button10.Location = new System.Drawing.Point(108, 155);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(75, 59);
@@ -204,6 +214,7 @@
             // button11
             // 
             this.button11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button11.Enabled = false;
             this.button11.Location = new System.Drawing.Point(202, 155);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(75, 59);
@@ -215,6 +226,7 @@
             // button12
             // 
             this.button12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button12.Enabled = false;
             this.button12.Location = new System.Drawing.Point(293, 155);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(75, 59);
@@ -226,6 +238,7 @@
             // button5
             // 
             this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button5.Enabled = false;
             this.button5.Location = new System.Drawing.Point(16, 85);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 59);
@@ -237,6 +250,7 @@
             // button6
             // 
             this.button6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button6.Enabled = false;
             this.button6.Location = new System.Drawing.Point(108, 85);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 59);
@@ -248,6 +262,7 @@
             // button7
             // 
             this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button7.Enabled = false;
             this.button7.Location = new System.Drawing.Point(202, 85);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(75, 59);
@@ -259,6 +274,7 @@
             // button8
             // 
             this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button8.Enabled = false;
             this.button8.Location = new System.Drawing.Point(293, 85);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(75, 59);
@@ -270,6 +286,7 @@
             // button4
             // 
             this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button4.Enabled = false;
             this.button4.Location = new System.Drawing.Point(293, 16);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 59);
@@ -281,6 +298,7 @@
             // button3
             // 
             this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(202, 16);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 59);
@@ -292,6 +310,7 @@
             // button2
             // 
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(108, 16);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 59);
@@ -304,6 +323,7 @@
             // 
             this.button1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(16, 16);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 59);
@@ -320,6 +340,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "W_Tables";
             this.Text = "W_Tables";
+            this.Load += new System.EventHandler(this.W_Tables_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

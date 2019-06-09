@@ -52,24 +52,6 @@
     <Compile Include="Admin pages\Admin page.Designer.cs">
       <DependentUpon>Admin page.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin pages\A_Menu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Admin pages\A_Menu.Designer.cs">
-      <DependentUpon>A_Menu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Admin pages\A_Table.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Admin pages\A_Table.Designer.cs">
-      <DependentUpon>A_Table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Admin pages\A_Waiter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Admin pages\A_Waiter.Designer.cs">
-      <DependentUpon>A_Waiter.cs</DependentUpon>
-    </Compile>
     <Compile Include="Customer Pages\C_Book.cs">
       <SubType>Form</SubType>
     </Compile>

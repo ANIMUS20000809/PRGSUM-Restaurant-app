@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace Restaurant_App
 {
     public partial class W_Spec : Form
     {
+        private List<int> Bill = new List<int>();
         private int bill;
+        //Using abstract data type
         private List<int> list = new List<int>();
         public W_Spec()
         {
@@ -97,21 +100,50 @@ namespace Restaurant_App
         /// </summary>
         private void Checkout()
         {
-            if (MessageBox.Show("Are sure you want to proceed? You won't be able to change the bill if you proceed", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            try
             {
-                foreach (int item in list)
+                using (SqlConnection con = new SqlConnection(SessionContext.ConnectionString))
                 {
-                    bill += item;
+                    
+                    con.Open();
+
+                    if (con.State == ConnectionState.Open)
+                    {
+                        using (SqlCommand com = new SqlCommand())
+                        {
+                            com.Connection = con;
+                            com.CommandText = "SELECT Menu";
+                        }
+                    }
                 }
 
-                label6.Text += "R" + bill.ToString();
+                if (MessageBox.Show("Are sure you want to proceed? You won't be able to change the bill if you proceed",
+                                    "Confirmation",
+                                    MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    foreach (int item in list)
+                    {
+                        bill += item;
+                    }
 
-                MessageBox.Show("Bill is completed!");
-                btnAdd.Enabled = false;
-                button1.Enabled = false;
-                button2.Enabled = false;
-                trackBar1.Enabled = false;
-                comboBox1.Enabled = false;
+                    label6.Text += "R" + bill.ToString();
+
+                    MessageBox.Show("Bill is completed!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btnAdd.Enabled = false;
+                    button1.Enabled = false;
+                    button2.Enabled = false;
+                    trackBar1.Enabled = false;
+                    comboBox1.Enabled = false;
+                }
+            }
+            catch (SqlException sEx)
+            {
+                MessageBox.Show(sEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("An error ocurred... please try again: " + Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         /// <summary>

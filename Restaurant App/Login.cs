@@ -13,13 +13,12 @@ namespace Restaurant_App
 {
     public partial class Login : Form
     {
-        public string constr = "Data Source=ANIMUS;Initial Catalog=Restaurant;Integrated Security=True";
         public Login()
         {
             InitializeComponent();
         }
+
         #region Methods
-        // TODO: Search the user name from the fucking database!!!!
         /// <summary>
         /// Checks the username
         /// </summary>
@@ -27,45 +26,76 @@ namespace Restaurant_App
         {
             try
             {
-                switch (usrbx.Text)
+                if (usrbx.Text == "Admin")
                 {
-                    case "Admin":
-                        SessionContext.Role = SessionContext.SessionContextRole.Admin;
-                        MessageBox.Show($"Welcome back {SessionContext.Role}!");
-                        Admin_page a = new Admin_page();
-                        a.ShowDialog();
-                        break;
+                    MessageBox.Show($"Welcome back Admin!");
+                    Admin_page a = new Admin_page();
+                    a.ShowDialog();
+                }
+                else
+                {
+                    using (SqlConnection con = new SqlConnection(SessionContext.ConnectionString))
+                    {
+                        con.Open();
 
-                    case "Richard":
-                        SessionContext.Role = SessionContext.SessionContextRole.Customer;
-                        MessageBox.Show($"Welcome back {SessionContext.Role}!");
-                        C_Book c = new C_Book();
-                        c.ShowDialog();
-                        break;
+                        if (con.State == ConnectionState.Open)
+                        {
+                            using (SqlCommand com = new SqlCommand("SELECT * FROM Booking", con))
+                            {
+                                
+                                using (SqlDataReader rd = com.ExecuteReader())
+                                {
+                                    while (rd.Read())
+                                    {
+                                        SessionContext.bookRowCount++;
+                                    }
+                                }
 
-                    case "Donovan":
-                        SessionContext.Role = SessionContext.SessionContextRole.Waiter;
-                        MessageBox.Show($"Welcome back {SessionContext.Role}!");
-                        W_Tables w = new W_Tables();
-                        w.ShowDialog();
-                        break;
+                                com.CommandText = $"SELECT Name, Role, AccountID FROM Accounts WHERE Name = '{usrbx.Text}'";
+                                using (SqlDataReader rd = com.ExecuteReader())
+                                {
+                                    if (rd.HasRows)
+                                    {
+                                        rd.Read();
+                                        switch (rd["Role"].ToString())
+                                        {
+                                            case "Customers":
+                                                SessionContext.Name = rd["Name"].ToString();
+                                                SessionContext.ID = (int)rd["AccountID"];
+                                                MessageBox.Show($"Welcome back {rd["Name"].ToString()}!");
+                                                C_Book c = new C_Book();
+                                                c.ShowDialog();
+                                                break;
 
-                    default:
-                        MessageBox.Show("Username or password is incorrect");
-                        break;
+                                            case "Waiters":
+                                                SessionContext.Name = rd["Name"].ToString();
+                                                MessageBox.Show($"Welcome back {rd["Name"].ToString()}!");
+                                                W_Tables w = new W_Tables();
+                                                w.ShowDialog();
+                                                break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Username or password incorrect", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }
+                            }
+                        }
+                    } 
                 }
             }
             catch (FormatException fEx)
             {
-                MessageBox.Show(fEx.Message);
+                MessageBox.Show(fEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (InvalidOperationException iex)
             {
-                MessageBox.Show(iex.Message);
+                MessageBox.Show(iex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error ocurred. Please try again: " + ex.Message);
+                MessageBox.Show("An error occurred. Please try again: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         /// <summary>
@@ -110,8 +140,8 @@ namespace Restaurant_App
         {
             enter(e);
         }
-        #endregion
 
+        #endregion
 
     }
 }

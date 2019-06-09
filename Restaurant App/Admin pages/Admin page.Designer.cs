@@ -475,10 +475,10 @@
 
         #endregion
 
-        private RestaurantDataSet restaurantDataSet;
+        public RestaurantDataSet restaurantDataSet;
         private System.Windows.Forms.BindingSource accountsBindingSource;
         private RestaurantDataSetTableAdapters.AccountsTableAdapter accountsTableAdapter;
-        private RestaurantDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        public RestaurantDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.BindingNavigator BindingNavigator;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;

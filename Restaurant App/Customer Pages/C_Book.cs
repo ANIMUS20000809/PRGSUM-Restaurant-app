@@ -24,7 +24,7 @@ namespace Restaurant_App
         /// <param name="table"> The number of the table being booked</param>
         private void Book(string table)
         {
-            if (MessageBox.Show("Are you sure you want to book", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to book?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
             {
                 // TODO: Save booking to database
                 MessageBox.Show("Table Booked!");

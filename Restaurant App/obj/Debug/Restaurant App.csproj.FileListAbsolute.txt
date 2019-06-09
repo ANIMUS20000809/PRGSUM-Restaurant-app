@@ -9,3 +9,5 @@ D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\D
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant App.csproj.CoreCompileInputs.cache
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant App.exe
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant App.pdb
+D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant App.csprojAssemblyReference.cache
+D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant_App.W_Spec.resources

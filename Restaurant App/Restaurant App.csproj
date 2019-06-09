@@ -117,6 +117,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Waiter pages\W_Spec.resx">
+      <DependentUpon>W_Spec.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Waiter pages\W_Tables.resx">
       <DependentUpon>W_Tables.cs</DependentUpon>
     </EmbeddedResource>

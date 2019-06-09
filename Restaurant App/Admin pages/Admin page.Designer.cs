@@ -53,8 +53,6 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.waitersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.waitersTableAdapter = new Restaurant_App.RestaurantDataSetTableAdapters.WaitersTableAdapter();
             this.accountsDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,7 +79,6 @@
             this.BindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.menuBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.waitersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookingBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookingDataGridView)).BeginInit();
@@ -106,13 +103,11 @@
             this.tableAdapterManager.AccountsTableAdapter = this.accountsTableAdapter;
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.BookingTableAdapter = null;
-            this.tableAdapterManager.CustomersTableAdapter = null;
             this.tableAdapterManager.MenuTableAdapter = null;
             this.tableAdapterManager.Order_lineTableAdapter = null;
             this.tableAdapterManager.OrdersTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = Restaurant_App.RestaurantDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             this.tableAdapterManager.Waiter_tablesTableAdapter = null;
-            this.tableAdapterManager.WaitersTableAdapter = null;
             // 
             // BindingNavigator
             // 
@@ -278,15 +273,6 @@
             this.dataGridViewTextBoxColumn3.DataPropertyName = "Price";
             this.dataGridViewTextBoxColumn3.HeaderText = "Price";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // waitersBindingSource
-            // 
-            this.waitersBindingSource.DataMember = "Waiters";
-            this.waitersBindingSource.DataSource = this.restaurantDataSet;
-            // 
-            // waitersTableAdapter
-            // 
-            this.waitersTableAdapter.ClearBeforeFill = true;
             // 
             // accountsDataGridView
             // 
@@ -464,7 +450,6 @@
             this.BindingNavigator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.menuBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.waitersBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountsDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookingBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookingDataGridView)).EndInit();
@@ -498,8 +483,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.BindingSource waitersBindingSource;
-        private RestaurantDataSetTableAdapters.WaitersTableAdapter waitersTableAdapter;
         private System.Windows.Forms.DataGridView accountsDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;

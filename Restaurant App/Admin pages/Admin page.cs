@@ -17,6 +17,7 @@ namespace Restaurant_App
             InitializeComponent();
         }
 
+        #region Event Handlers
         private void AccountsBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
             this.Validate();
@@ -51,6 +52,7 @@ namespace Restaurant_App
         private void AccountsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             BindingNavigator.BindingSource = accountsBindingSource;
-        }
+        } 
+        #endregion
     }
 }

@@ -23,14 +23,28 @@ namespace Restaurant_App
         /// Booking the selected table
         /// </summary>
         /// <param name="table"> The number of the table being booked</param>
-        private void Book(string table)
+        private void Book(string table, object s)
         {
-            if (MessageBox.Show("Are you sure you want to book?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+            if (s is Control)
             {
-                // TODO: Save booking to database
-                MessageBox.Show("Table Booked!");
-            }
+                Control c = (Control)s;
 
+                if (c.BackColor == Color.Lime)
+                {
+                    if (MessageBox.Show("Are you sure you want to book?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    {
+                        // TODO: Save booking to database
+                        MessageBox.Show("Table Booked!", "Booked", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                    c.BackColor = Color.Red; 
+                }
+                else
+                {
+                    MessageBox.Show("This table is already booked", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            
             fillData(dateTimePicker1.Value);
         }
         /// <summary>
@@ -40,9 +54,96 @@ namespace Restaurant_App
         public void fillData(DateTime dt)
         {
             // TODO: Fill the booking data
-            using (SqlConnection con = new SqlConnection(SessionContext.ConnectionString))
+            try
             {
+                using (SqlConnection con = new SqlConnection(SessionContext.ConnectionString))
+                {
 
+                    if (con.State == ConnectionState.Open)
+                    {
+                        con.Open();
+
+                        using (SqlCommand com = new SqlCommand($"SELECT Date, TableID FROM Booking WHERE Date = '{dt.ToString()}'", con))
+                        {
+                            using (SqlDataReader rd = com.ExecuteReader())
+                            {
+                                if (rd.HasRows)
+                                {
+                                    while (rd.Read())
+                                    {
+                                        switch (rd["TableID"])
+                                        {
+                                            case 1:
+                                                button1.BackColor = Color.Red;
+                                                break;
+                                            case 2:
+                                                button2.BackColor = Color.Red;
+                                                break;
+                                            case 3:
+                                                button3.BackColor = Color.Red;
+                                                break;
+                                            case 4:
+                                                button4.BackColor = Color.Red;
+                                                break;
+                                            case 5:
+                                                button5.BackColor = Color.Red;
+                                                break;
+                                            case 6:
+                                                button6.BackColor = Color.Red;
+                                                break;
+                                            case 7:
+                                                button7.BackColor = Color.Red;
+                                                break;
+                                            case 8:
+                                                button8.BackColor = Color.Red;
+                                                break;
+                                            case 9:
+                                                button9.BackColor = Color.Red;
+                                                break;
+                                            case 10:
+                                                button10.BackColor = Color.Red;
+                                                break;
+                                            case 11:
+                                                button11.BackColor = Color.Red;
+                                                break;
+                                            case 12:
+                                                button12.BackColor = Color.Red;
+                                                break;
+                                            case 13:
+                                                button13.BackColor = Color.Red;
+                                                break;
+                                            case 14:
+                                                button14.BackColor = Color.Red;
+                                                break;
+                                            case 15:
+                                                button15.BackColor = Color.Red;
+                                                break;
+                                            case 16:
+                                                button16.BackColor = Color.Red;
+                                                break;
+                                            case 17:
+                                                button17.BackColor = Color.Red;
+                                                break;
+                                            case 18:
+                                                button18.BackColor = Color.Red;
+                                                break;
+                                            case 19:
+                                                button19.BackColor = Color.Red;
+                                                break;
+                                            case 20:
+                                                button20.BackColor = Color.Red;
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException sEx)
+            {
+                MessageBox.Show(sEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -50,106 +151,106 @@ namespace Restaurant_App
         #region Event Handlers
         private void Button1_Click(object sender, EventArgs e)
         {
-            Book(button1.Text);
+            Book(button1.Text, sender);
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            Book(button2.Text);
+            Book(button2.Text, sender);
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
-            Book(button3.Text);
+            Book(button3.Text, sender);
         }
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            Book(button4.Text);
+            Book(button4.Text, sender);
         }
 
         private void Button5_Click(object sender, EventArgs e)
         {
-            Book(button5.Text);
+            Book(button5.Text, sender);
         }
 
         private void Button6_Click(object sender, EventArgs e)
         {
-            Book(button6.Text);
+            Book(button6.Text, sender);
         }
 
         private void Button7_Click(object sender, EventArgs e)
         {
-            Book(button7.Text);
+            Book(button7.Text, sender);
         }
 
         private void Button8_Click(object sender, EventArgs e)
         {
-            Book(button8.Text);
+            Book(button8.Text, sender);
         }
 
         private void Button9_Click(object sender, EventArgs e)
         {
-            Book(button9.Text);
+            Book(button9.Text, sender);
         }
 
         private void Button10_Click(object sender, EventArgs e)
         {
-            Book(button10.Text);
+            Book(button10.Text, sender);
         }
 
         private void Button11_Click(object sender, EventArgs e)
         {
-            Book(button11.Text);
+            Book(button11.Text, sender);
         }
 
         private void Button12_Click(object sender, EventArgs e)
         {
-            Book(button12.Text);
+            Book(button12.Text, sender);
         }
 
         private void Button13_Click(object sender, EventArgs e)
         {
-            Book(button13.Text);
+            Book(button13.Text, sender);
         }
 
         private void Button14_Click(object sender, EventArgs e)
         {
-            Book(button14.Text);
+            Book(button14.Text, sender);
         }
 
         private void Button15_Click(object sender, EventArgs e)
         {
-            Book(button15.Text);
+            Book(button15.Text, sender);
         }
 
         private void Button16_Click(object sender, EventArgs e)
         {
-            Book(button16.Text);
+            Book(button16.Text, sender);
         }
 
         private void Button17_Click(object sender, EventArgs e)
         {
-            Book(button17.Text);
+            Book(button17.Text, sender);
         }
 
         private void Button18_Click(object sender, EventArgs e)
         {
-            Book(button18.Text);
+            Book(button18.Text, sender);
         }
 
         private void Button19_Click(object sender, EventArgs e)
         {
-            Book(button19.Text);
+            Book(button19.Text, sender);
         }
 
         private void Button20_Click(object sender, EventArgs e)
         {
-            Book(button20.Text);
+            Book(button20.Text, sender);
         }
 
         #endregion
 
-        
+
     }
 }

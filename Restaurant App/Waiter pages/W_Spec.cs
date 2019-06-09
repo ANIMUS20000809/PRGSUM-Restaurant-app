@@ -30,26 +30,31 @@ namespace Restaurant_App
                 case 0:
                     listBox1.Items.Add(comboBox1.SelectedItem.ToString() + " R100 x" + trackBar1.Value.ToString());
                     list.Add(100 * trackBar1.Value);
+                    listBox1.SelectedIndex++;
                     break;
 
                 case 1:
                     listBox1.Items.Add(comboBox1.SelectedItem.ToString() + " R60 x" + trackBar1.Value.ToString());
                     list.Add(60 * trackBar1.Value);
+                    listBox1.SelectedIndex++;
                     break;
 
                 case 2:
                     listBox1.Items.Add(comboBox1.SelectedItem.ToString() + " R120 x" + trackBar1.Value.ToString());
                     list.Add(120 * trackBar1.Value);
+                    listBox1.SelectedIndex++;
                     break;
 
                 case 3:
                     listBox1.Items.Add(comboBox1.SelectedItem.ToString() + " R70 x" + trackBar1.Value.ToString());
                     list.Add(70 * trackBar1.Value);
+                    listBox1.SelectedIndex++;
                     break;
 
                 case 4:
                     listBox1.Items.Add(comboBox1.SelectedItem.ToString() + " R70 x" + trackBar1.Value.ToString());
                     list.Add(70 * trackBar1.Value);
+                    listBox1.SelectedIndex++;
                     break;
 
                 case -1:
@@ -58,11 +63,33 @@ namespace Restaurant_App
                     break;
             }
         }
-
+        /// <summary>
+        /// Deletes an item from the list
+        /// </summary>
         private void Delete()
         {
-            listBox1.Items.RemoveAt(listBox1.SelectedIndex);
-            list.RemoveAt(listBox1.SelectedIndex);
+
+            if (listBox1.Items.Count > 1)
+            {
+                if (listBox1.SelectedIndex != -1)
+                {
+                    list.RemoveAt(listBox1.SelectedIndex);
+                    listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+                    listBox1.SelectedIndex++;
+                }
+                else
+                {
+                    MessageBox.Show("Please select an item from the menu to delete.");
+                }
+            }
+            else if (listBox1.Items.Count != 0)
+            {
+                listBox1.Items.Clear();
+            }
+            else
+            {
+                MessageBox.Show("There are no items to delete");
+            }
         }
 
         /// <summary>
@@ -70,7 +97,7 @@ namespace Restaurant_App
         /// </summary>
         private void Checkout()
         {
-            if (MessageBox.Show("Are sure you want to proceed? You won't be able to change the bill if you proceed", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+            if (MessageBox.Show("Are sure you want to proceed? You won't be able to change the bill if you proceed", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 foreach (int item in list)
                 {
@@ -87,7 +114,9 @@ namespace Restaurant_App
                 comboBox1.Enabled = false;
             }
         }
-
+        /// <summary>
+        /// Clears the bill
+        /// </summary>
         private void newBill()
         {
             if (MessageBox.Show("Are you sure? All current items on the list will be lost?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -117,6 +146,7 @@ namespace Restaurant_App
         }
         #endregion
 
+        #region Event Handlers
         private void W_Spec_Load(object sender, EventArgs e)
         {
             loadTable();
@@ -146,5 +176,6 @@ namespace Restaurant_App
         {
             newBill();
         }
+        #endregion
     }
 }

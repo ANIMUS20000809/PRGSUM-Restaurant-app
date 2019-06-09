@@ -46,6 +46,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin pages\Admin page.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin pages\Admin page.Designer.cs">
+      <DependentUpon>Admin page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin pages\A_Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin pages\A_Menu.Designer.cs">
+      <DependentUpon>A_Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin pages\A_Table.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin pages\A_Table.Designer.cs">
+      <DependentUpon>A_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin pages\A_Waiter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin pages\A_Waiter.Designer.cs">
+      <DependentUpon>A_Waiter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customer Pages\C_Book.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer Pages\C_Book.Designer.cs">
+      <DependentUpon>C_Book.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +90,21 @@
       <DependentUpon>RestaurantDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="SessionContext.cs" />
+    <Compile Include="Waiter pages\W_Tables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Waiter pages\W_Tables.Designer.cs">
+      <DependentUpon>W_Tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Waiter pages\W_Spec.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Waiter pages\W_Spec.Designer.cs">
+      <DependentUpon>W_Spec.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Customer Pages\C_Book.resx">
+      <DependentUpon>C_Book.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -72,6 +117,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Waiter pages\W_Tables.resx">
+      <DependentUpon>W_Tables.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -96,5 +144,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -38,6 +38,7 @@
             // 
             // lgn
             // 
+            this.lgn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lgn.Location = new System.Drawing.Point(154, 138);
             this.lgn.Name = "lgn";
             this.lgn.Size = new System.Drawing.Size(75, 23);
@@ -70,14 +71,17 @@
             this.usrbx.Name = "usrbx";
             this.usrbx.Size = new System.Drawing.Size(100, 20);
             this.usrbx.TabIndex = 2;
+            this.usrbx.Text = "Admin";
             this.usrbx.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Usrbx_KeyDown);
             // 
             // pwdbx
             // 
             this.pwdbx.Location = new System.Drawing.Point(213, 102);
             this.pwdbx.Name = "pwdbx";
+            this.pwdbx.PasswordChar = '$';
             this.pwdbx.Size = new System.Drawing.Size(100, 20);
             this.pwdbx.TabIndex = 2;
+            this.pwdbx.Text = "Admin";
             // 
             // Title
             // 

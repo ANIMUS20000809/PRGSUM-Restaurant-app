@@ -16,6 +16,7 @@ namespace Restaurant_App
         public C_Book()
         {
             InitializeComponent();
+            textBox1.Text = "1";
         }
 
         #region Methods
@@ -33,7 +34,11 @@ namespace Restaurant_App
 
                     if (c.BackColor == Color.Lime)
                     {
-                        if (MessageBox.Show("Are you sure you want to book?",
+                        if (MessageBox.Show("Are you sure you want to book?\n" +
+                                            $"Name: {SessionContext.Name}\n" +
+                                            $"Date: {dateTimePicker1.Value}\n" +
+                                            $"Number of people: {textBox1.Text}\n" +
+                                            $"Table: {table}",
                                             "Confirmation",
                                             MessageBoxButtons.YesNo,
                                             MessageBoxIcon.Information) == DialogResult.Yes)
@@ -47,8 +52,9 @@ namespace Restaurant_App
                                 {
                                     try
                                     {
-                                        using (SqlCommand com = new SqlCommand($"INSERT INTO Booking VALUES('{++SessionContext.bookRowCount}', '{SessionContext.ID}', {dateTimePicker1.Value}', '{Convert.ToInt32(textBox1.Text)}, 'False', '{table}')", con))
+                                        using (SqlCommand com = new SqlCommand($"INSERT INTO Booking(CustID, Date, [Number of people], [Checked in], TableID) VALUES({SessionContext.ID}, '{dateTimePicker1.Value}', {Convert.ToInt32(textBox1.Text)}, 'False', '{table}')", con))
                                         {
+                                            com.ExecuteNonQuery();
                                             c.BackColor = Color.Red;
                                             MessageBox.Show("Table Booked successfully!", "Booked", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                         }
@@ -315,7 +321,8 @@ namespace Restaurant_App
         {
             fillData(dateTimePicker1.Value);
         }
-        private void DateTimePicker1_MouseLeave(object sender, EventArgs e)
+
+        private void DateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             fillData(dateTimePicker1.Value);
         }

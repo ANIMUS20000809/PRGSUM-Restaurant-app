@@ -353,7 +353,7 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 1;
             this.dateTimePicker1.Value = new System.DateTime(2019, 6, 20, 18, 0, 0, 0);
-            this.dateTimePicker1.MouseLeave += new System.EventHandler(this.DateTimePicker1_MouseLeave);
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.DateTimePicker1_ValueChanged);
             // 
             // label2
             // 

@@ -22,6 +22,13 @@ namespace Restaurant_App
         {
             this.Validate();
             this.accountsBindingSource.EndEdit();
+            this.accountsTableAdapter.Update(this.restaurantDataSet);
+
+            this.bookingBindingSource.EndEdit();
+            this.bookingTableAdapter.Update(this.restaurantDataSet);
+
+            this.menuBindingSource.EndEdit();
+            this.menuTableAdapter.Update(this.restaurantDataSet);
             this.tableAdapterManager.UpdateAll(this.restaurantDataSet);
 
         }

@@ -129,33 +129,33 @@ namespace Restaurant_App
 
         private void W_Tables_Load(object sender, EventArgs e)
         {
-            switch (SessionContext.Name)
+            switch (SessionContext.ID)
             {
-                case "Donovan":
+                case 6:
                     button1.Enabled = true;
                     button2.Enabled = true;
                     button3.Enabled = true;
                     button4.Enabled = true;
                     break;
-                case "Grayson":
+                case 7:
                     button5.Enabled = true;
                     button6.Enabled = true;
                     button7.Enabled = true;
                     button8.Enabled = true;
                     break;
-                case "Lizelle":
+                case 8:
                     button9.Enabled = true;
                     button10.Enabled = true;
                     button11.Enabled = true;
                     button12.Enabled = true;
                     break;
-                case "Anthony":
+                case 9:
                     button13.Enabled = true;
                     button14.Enabled = true;
                     button15.Enabled = true;
                     button16.Enabled = true;
                     break;
-                case "Cindy":
+                case 10:
                     button17.Enabled = true;
                     button18.Enabled = true;
                     button19.Enabled = true;

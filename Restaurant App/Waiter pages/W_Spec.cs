@@ -12,14 +12,16 @@ using System.Data.SqlClient;
 namespace Restaurant_App
 {
     public partial class W_Spec : Form
-    {   //Using abstract data types
+    {   //TODO: Using abstract data types
+
+        #region Fields
         private List<int> billAmmount = new List<int>();
         private List<string> itemName = new List<string>();
         private List<int> itemPrice = new List<int>();
         private int bill;
-        private int orderID = 0;
-        
-        
+        private int orderID = 0; 
+        #endregion
+
         public W_Spec()
         {
             InitializeComponent();
@@ -123,7 +125,7 @@ namespace Restaurant_App
         /// Checking out
         /// </summary>
         private void Checkout()
-        {// TODO: Add bill to bill table
+        {
             try
             {
                 if (MessageBox.Show("Are sure you want to proceed? You won't be able to change the bill if you proceed",

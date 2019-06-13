@@ -40,7 +40,7 @@ namespace Restaurant_App
 
                         if (con.State == ConnectionState.Open)
                         {
-                            using (SqlCommand com = new SqlCommand("SELECT * FROM Booking", con))
+                            using (SqlCommand com = new SqlCommand("SELECT * FROM Bookings", con))
                             {
                                 
                                 using (SqlDataReader rd = com.ExecuteReader())
@@ -51,7 +51,7 @@ namespace Restaurant_App
                                     }
                                 }
 
-                                com.CommandText = $"SELECT Name, Role, AccountID FROM Accounts WHERE Name = '{usrbx.Text}'";
+                                com.CommandText = $"SELECT Name, Role, AcountID FROM Accounts WHERE Name = '{usrbx.Text}'";
                                 using (SqlDataReader rd = com.ExecuteReader())
                                 {
                                     if (rd.HasRows)
@@ -59,16 +59,17 @@ namespace Restaurant_App
                                         rd.Read();
                                         switch (rd["Role"].ToString())
                                         {
-                                            case "Customers":
+                                            case "Customer":
                                                 SessionContext.Name = rd["Name"].ToString();
-                                                SessionContext.ID = (int)rd["AccountID"];
+                                                SessionContext.ID = (int)rd["AcountID"];
                                                 MessageBox.Show($"Welcome back {rd["Name"].ToString()}!");
                                                 C_Book c = new C_Book();
                                                 c.ShowDialog();
                                                 break;
 
-                                            case "Waiters":
+                                            case "Waiter":
                                                 SessionContext.Name = rd["Name"].ToString();
+                                                SessionContext.ID = (int)rd["AcountID"];
                                                 MessageBox.Show($"Welcome back {rd["Name"].ToString()}!");
                                                 W_Tables w = new W_Tables();
                                                 w.ShowDialog();
@@ -138,7 +139,10 @@ namespace Restaurant_App
 
         private void Usrbx_KeyDown(object sender, KeyEventArgs e)
         {
-            enter(e);
+            if (e.KeyCode == Keys.Enter)
+            {
+                enter(e); 
+            }
         }
 
         #endregion

@@ -1,14 +1,14 @@
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\bin\Debug\Restaurant App.exe.config
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\bin\Debug\Restaurant App.exe
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\bin\Debug\Restaurant App.pdb
+D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant_App.Admin_page.resources
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant_App.C_Book.resources
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant_App.Login.resources
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant_App.Properties.Resources.resources
+D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant_App.W_Spec.resources
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant_App.W_Tables.resources
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant App.csproj.GenerateResource.cache
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant App.csproj.CoreCompileInputs.cache
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant App.exe
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant App.pdb
 D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant App.csprojAssemblyReference.cache
-D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant_App.W_Spec.resources
-D:\OneDrive - CTU Career\Modules\PRG511\SUM1\Restaurant App\Restaurant App\obj\Debug\Restaurant_App.Admin_page.resources

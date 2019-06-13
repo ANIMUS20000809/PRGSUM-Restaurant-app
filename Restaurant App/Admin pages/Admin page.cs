@@ -18,43 +18,88 @@ namespace Restaurant_App
         }
 
         #region Event Handlers
-        private void AccountsBindingNavigatorSaveItem_Click(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.accountsBindingSource.EndEdit();
-            this.accountsTableAdapter.Update(this.restaurantDataSet);
-
-            this.bookingBindingSource.EndEdit();
-            this.bookingTableAdapter.Update(this.restaurantDataSet);
-
-            this.menuBindingSource.EndEdit();
-            this.menuTableAdapter.Update(this.restaurantDataSet);
-            this.tableAdapterManager.UpdateAll(this.restaurantDataSet);
-
-        }
 
         private void Admin_page_Load(object sender, EventArgs e)
         {
-            this.bookingTableAdapter.Fill(this.restaurantDataSet.Booking);
-            this.menuTableAdapter.Fill(this.restaurantDataSet.Menu);
-            this.accountsTableAdapter.Fill(this.restaurantDataSet.Accounts);
+            // TODO: This line of code loads data into the 'restaurantFinal.Bookings' table. You can move, or remove it, as needed.
+            this.bookingsTableAdapter.Fill(this.restaurantFinal.Bookings);
+            // TODO: This line of code loads data into the 'restaurantFinal.Menu' table. You can move, or remove it, as needed.
+            this.menuTableAdapter1.Fill(this.restaurantFinal.Menu);
+            // TODO: This line of code loads data into the 'restaurantFinal.Accounts' table. You can move, or remove it, as needed.
+            this.accountsTableAdapter1.Fill(this.restaurantFinal.Accounts);
 
         }
 
-        private void BookingDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void BookingsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            BindingNavigator.BindingSource = bookingBindingSource;
+            bindingNavigator1.BindingSource = bookingsBindingSource;
         }
 
-        private void MenuDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void AccountsDataGridView_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            BindingNavigator.BindingSource = menuBindingSource;
+            bindingNavigator1.BindingSource = accountsBindingSource1;
         }
 
-        private void AccountsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void MenuDataGridView_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            BindingNavigator.BindingSource = accountsBindingSource;
-        } 
+            bindingNavigator1.BindingSource = menuBindingSource1;
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            saveToDatabase();
+        }
+
+        private void saveToDatabase()
+        {
+            try
+            {
+                this.Validate();
+
+                this.accountsBindingSource.EndEdit();
+                this.accountsTableAdapter1.Update(this.restaurantFinal.Accounts);
+
+                this.bookingsBindingSource.EndEdit();
+                this.bookingsTableAdapter.Update(this.restaurantFinal.Bookings);
+
+                this.menuBindingSource.EndEdit();
+                this.menuTableAdapter1.Update(this.restaurantFinal.Menu);
+
+                this.tableAdapterManager1.UpdateAll(this.restaurantFinal);
+
+                MessageBox.Show("Saved to database!", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ToolStripButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Validate();
+
+                this.accountsBindingSource.EndEdit();
+                this.accountsTableAdapter1.Update(this.restaurantFinal);
+
+                this.bookingsBindingSource.EndEdit();
+                this.bookingsTableAdapter.Update(this.restaurantFinal);
+
+                this.menuBindingSource.EndEdit();
+                this.menuTableAdapter1.Update(this.restaurantFinal);
+
+                this.tableAdapterManager1.UpdateAll(this.restaurantFinal);
+
+                MessageBox.Show("Saved to database!", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
         #endregion
     }
 }

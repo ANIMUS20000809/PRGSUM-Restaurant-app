@@ -11,7 +11,7 @@ namespace Restaurant_App
     public class SessionContext
     {
         #region Fields
-        public const string ConnectionString = "Data Source=ANIMUS;Initial Catalog=Restaurant;Integrated Security=True";
+        public const string ConnectionString = "Data Source=ANIMUS\\MYSERVER;Initial Catalog=Restaurant;Integrated Security=True";
 
         public static string Name { get; set; }
 

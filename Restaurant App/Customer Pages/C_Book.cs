@@ -21,7 +21,7 @@ namespace Restaurant_App
 
         #region Methods
         /// <summary>
-        /// Booking the selected table
+        /// Bookings the selected table
         /// </summary>
         /// <param name="table"> The number of the table being booked</param>
         private void Book(string table, object s)
@@ -43,7 +43,6 @@ namespace Restaurant_App
                                             MessageBoxButtons.YesNo,
                                             MessageBoxIcon.Information) == DialogResult.Yes)
                         {
-                            // TODO: Save booking to database
                             using (SqlConnection con = new SqlConnection(SessionContext.ConnectionString))
                             {
                                 con.Open();
@@ -52,7 +51,7 @@ namespace Restaurant_App
                                 {
                                     try
                                     {
-                                        using (SqlCommand com = new SqlCommand($"INSERT INTO Booking(CustID, Date, [Number of people], [Checked in], TableID) VALUES({SessionContext.ID}, '{dateTimePicker1.Value}', {Convert.ToInt32(textBox1.Text)}, 'False', '{table}')", con))
+                                        using (SqlCommand com = new SqlCommand($"INSERT INTO Bookings(BookingID, CustID, Date, [Number of people], [Checked in], TableID) VALUES({++SessionContext.bookRowCount},{SessionContext.ID}, '{dateTimePicker1.Value}', {Convert.ToInt32(textBox1.Text)}, 'False', '{table}')", con))
                                         {
                                             com.ExecuteNonQuery();
                                             c.BackColor = Color.Red;
@@ -86,12 +85,11 @@ namespace Restaurant_App
             fillData(dateTimePicker1.Value);
         }
         /// <summary>
-        /// Fills the booking data from the bookings table
+        /// Fills the Bookings data from the Bookingss table
         /// </summary>
         /// <param name="dt">The DateTime value of the DatePicker</param>
         public void fillData(DateTime dt)
         {
-            // TODO: Fill in the booking data
             try
             {
                 using (SqlConnection con = new SqlConnection(SessionContext.ConnectionString))
@@ -100,7 +98,7 @@ namespace Restaurant_App
 
                     if (con.State == ConnectionState.Open)
                     {
-                        using (SqlCommand com = new SqlCommand($"SELECT Date, TableID FROM Booking WHERE Date = '{dt.ToString()}'", con))
+                        using (SqlCommand com = new SqlCommand($"SELECT Date, TableID FROM Bookings WHERE Date = '{dt.ToString()}'", con))
                         {
                             using (SqlDataReader rd = com.ExecuteReader())
                             {

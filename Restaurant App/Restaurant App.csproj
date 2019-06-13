@@ -71,6 +71,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RestaurantDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="RestaurantFinal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RestaurantFinal.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SessionContext.cs" />
     <Compile Include="Waiter pages\W_Tables.cs">
       <SubType>Form</SubType>
@@ -127,6 +132,17 @@
     </None>
     <None Include="RestaurantDataSet.xss">
       <DependentUpon>RestaurantDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="RestaurantFinal.xsc">
+      <DependentUpon>RestaurantFinal.xsd</DependentUpon>
+    </None>
+    <None Include="RestaurantFinal.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RestaurantFinal.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="RestaurantFinal.xss">
+      <DependentUpon>RestaurantFinal.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

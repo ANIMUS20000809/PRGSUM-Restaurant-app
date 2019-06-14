@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Restaurant_App
 {
@@ -51,7 +46,9 @@ namespace Restaurant_App
                                 {
                                     try
                                     {
-                                        using (SqlCommand com = new SqlCommand($"INSERT INTO Bookings(BookingID, CustID, Date, [Number of people], [Checked in], TableID) VALUES({++SessionContext.bookRowCount},{SessionContext.ID}, '{dateTimePicker1.Value}', {Convert.ToInt32(textBox1.Text)}, 'False', '{table}')", con))
+                                        using (SqlCommand com = new SqlCommand($"INSERT INTO Bookings(BookingID, CustID, Date, [Number of people], [Checked in], " +
+                                                                               $"TableID) VALUES({++SessionContext.bookRowCount},{SessionContext.ID}, '{dateTimePicker1.Value}', " +
+                                                                               $"{Convert.ToInt32(textBox1.Text)}, 'False', '{table}')", con))
                                         {
                                             com.ExecuteNonQuery();
                                             c.BackColor = Color.Red;
@@ -325,7 +322,5 @@ namespace Restaurant_App
             fillData(dateTimePicker1.Value);
         }
         #endregion
-
-
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Restaurant_App
@@ -42,7 +37,7 @@ namespace Restaurant_App
                     if (con.State == System.Data.ConnectionState.Open)
                     {
                         MessageBox.Show("Database connected successfully!");
-                    } 
+                    }
                 }
             }
             catch (SqlException sqlEx)
